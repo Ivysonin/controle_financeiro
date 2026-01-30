@@ -66,8 +66,20 @@ http://127.0.0.1:5000
 
 ---
 
+## 📷 Vídeos
+
+[controle_financeiro.webm](https://github.com/user-attachments/assets/43e1dc7a-33ab-4465-9c8b-e6118e7e922d)
+
+---
+
 ## 🚀 Próximos passos (ideias)
 
 * Persistência com banco de dados
 * Autenticação
 * Dashboard com saldo total
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob os termos da [Licença MIT](./LICENSE)
