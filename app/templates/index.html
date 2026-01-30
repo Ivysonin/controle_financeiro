@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Financeiro</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <h1>Controle Financeiro</h1>
+    <button id="btnNovo" class="btn-primary">+ Novo lançamento</button>
+  </header>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal">
+    <div class="modal-content card" id="formLancamento">
+      <h2>Novo lançamento</h2>
+
+      <div class="form-grid">
+        <input id="descricao" placeholder="Descrição" />
+        <input id="valor" type="number" placeholder="Valor" />
+        <input id="data" type="date" />
+        <select id="tipo">
+          <option value="RECEITA">Receita</option>
+          <option value="GASTO">Gasto</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button id="btnSalvar" class="btn-primary">Salvar</button>
+        <button id="btnCancelar" class="btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTRO -->
+  <section class="card">
+    <div class="toolbar">
+      <select id="filtroTipo">
+        <option value="">Todos</option>
+        <option value="RECEITA">Receitas</option>
+        <option value="GASTO">Gastos</option>
+      </select>
+      <button id="btnBuscar" class="btn-secondary">Filtrar</button>
+    </div>
+  </section>
+
+  <!-- LISTAGEM EM CARDS -->
+  <section class="list">
+    <div id="listaFinancas" class="finance-list"></div>
+  </section>
+
+  <script type="module" src="../static/js/script.js"></script>
+</body>
+</html>
