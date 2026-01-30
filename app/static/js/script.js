@@ -2,6 +2,7 @@ import {
   listarFinancas,
   listarFinancasPorTipo,
   criarFinanca,
+  atualizarFinanca,
   deletarFinanca
 } from "./financasApi.js";
 
@@ -18,6 +19,8 @@ const btnCancelar = document.getElementById("btnCancelar");
 
 const modal = document.getElementById("modal");
 
+let idEmEdicao = null;
+
 /* =====================
    MODAL
 ===================== */
@@ -28,6 +31,8 @@ function abrirModal() {
 function fecharModal() {
   modal.classList.remove("active");
   limparFormulario();
+  idEmEdicao = null;
+  document.getElementById("tipo").disabled = false;
 }
 
 /* =====================
@@ -48,7 +53,22 @@ async function salvarLancamento() {
 
   if (!descricao || !valor || !data) return;
 
-  await criarFinanca({ descricao, valor, data, tipo });
+  if (idEmEdicao) {
+    // PUT → NÃO envia tipo
+    await atualizarFinanca(idEmEdicao, {
+      descricao,
+      valor,
+      data
+    });
+  } else {
+    // POST → envia tudo
+    await criarFinanca({
+      descricao,
+      valor,
+      data,
+      tipo
+    });
+  }
 
   fecharModal();
   carregarFinancas();
@@ -74,12 +94,19 @@ function criarCard(item) {
       <span class="financa-tipo">${item.tipo}</span>
     </div>
 
-    <button class="btn-delete">Excluir</button>
+    <div class="card-actions">
+      <button class="btn-edit">Editar</button>
+      <button class="btn-delete">Excluir</button>
+    </div>
   `;
 
   card.querySelector(".btn-delete").addEventListener("click", async () => {
     await deletarFinanca(item.id);
     carregarFinancas();
+  });
+
+  card.querySelector(".btn-edit").addEventListener("click", () => {
+    editarLancamento(item);
   });
 
   return card;
@@ -104,6 +131,19 @@ async function carregarFinancas() {
     : await listarFinancas();
 
   renderizarFinancas(dados);
+}
+
+function editarLancamento(item) {
+  idEmEdicao = item.id;
+
+  document.getElementById("descricao").value = item.descricao;
+  document.getElementById("valor").value = item.valor;
+  document.getElementById("data").value = item.data;
+  document.getElementById("tipo").value = item.tipo;
+
+  document.getElementById("tipo").disabled = true;
+
+  abrirModal();
 }
 
 /* =====================
