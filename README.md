@@ -24,7 +24,7 @@ Tudo em uma interface limpa, responsiva e direta ao ponto.
 
 ### 1. Clonar o repositório
 ```bash
-git clone ...
+git clone https://github.com/Ivysonin/controle_financeiro.git
 cd controle_financeiro
 ```
 
